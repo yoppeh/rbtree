@@ -76,6 +76,33 @@ void rbtree_free(rbtree_t *tree) {
     free(tree);
 }
 
+char **rbtree_get_keys(rbtree_t *tree) {
+    char **keys = NULL;
+    rbtree_node_t **stack = NULL;
+    int i = 0;
+    int j = 0;
+    if (tree != NULL) {
+        stack = malloc(tree->node_count * sizeof(rbtree_node_t *));
+        keys = malloc(tree->node_count * (sizeof(char *) + 1));
+        if (keys != NULL && stack != NULL) {
+            rbtree_node_t *n = tree->root;
+            while (n != &tree->nil_node || i > 0) {
+                if (n != &tree->nil_node) {
+                    stack[i++] = n;
+                    n = n->left;
+                } else {
+                    n = stack[--i];
+                    keys[j++] = n->key;
+                    n = n->right;
+                }
+            }
+            free(stack);
+        }
+        keys[j] = NULL;
+    }
+    return keys;
+}
+
 rbtree_node_t *rbtree_insert(rbtree_t *tree, void *key) {
     rbtree_node_t *child = tree->root;
     rbtree_node_t *parent = &tree->nil_node;

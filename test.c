@@ -96,6 +96,19 @@ int main(int ac, char **av) {
     } else {
         printf("ok!\n");
     }
+    printf("checking key retrieval...\n");
+    char **keys = rbtree_get_keys(randomized_tree);
+    int i = 0;
+    int count = 0;
+    for (i = 0; keys[i] != NULL; i++) {
+        rbtree_node_t *n = rbtree_lookup(randomized_tree, keys[i]);
+        if (n == NULL) {
+            printf("key \"%s\" not found in randomized tree\n", keys[i]);
+        } else {
+            count++;
+        }
+    }
+    printf("found %d keys, %d confirmed\n", i, count);
     printf("%i nodes to delete...\n", to_delete_count);
     printf("deleting approximately half of words in randomized tree...");
     fflush(stdout);

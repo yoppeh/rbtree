@@ -109,7 +109,7 @@ typedef struct rbtree_t {
  * @param subtree The subtree to be deleted. If NULL, the entire tree is
  * deleted.
  */
-void rbtree_delete(rbtree_t *tree, rbtree_node_t *node);
+extern void rbtree_delete(rbtree_t *tree, rbtree_node_t *node);
 
 /** 
  * @brief Delete a node from the tree. The del_func, if not NULL, will be 
@@ -118,14 +118,24 @@ void rbtree_delete(rbtree_t *tree, rbtree_node_t *node);
  * @param tree The rbtree containing the node to be deleted.
  * @param node The node to be deleted.
  */
-void rbtree_delete_node(rbtree_t *tree, rbtree_node_t *node);
+extern void rbtree_delete_node(rbtree_t *tree, rbtree_node_t *node);
 
 /**
  * @brief Delete all nodes in the tree and frees memory allocated to the tree
  * structure.
  * @param tree The rbtree to be deleted.
  */
-void rbtree_free(rbtree_t *tree);
+extern void rbtree_free(rbtree_t *tree);
+
+/**
+ * @brief Returns a pointer to a NULL-terminated array of pointers to the 
+ * keys in the tree in ascending order.
+ * 
+ * @param tree The rbtree for which the keys will be returned.
+ * @return char** NULL on error, otherwise a pointer to a NULL-terminated
+ * array of pointers to the keys in the tree.
+ */
+extern char **rbtree_get_keys(rbtree_t *tree);
 
 /** 
  * @brief Insert a new node with the given key into the tree. The cmp_func 
@@ -138,7 +148,7 @@ void rbtree_free(rbtree_t *tree);
  * @return A pointer to the newly inserted node or the node with the matching
  * key if it already exists in the tree.
  */
-rbtree_node_t *rbtree_insert(rbtree_t *tree, void *key);
+extern rbtree_node_t *rbtree_insert(rbtree_t *tree, void *key);
 
 /** 
  * @brief Look up a node with the given key. If the node with a matching key 
@@ -150,7 +160,7 @@ rbtree_node_t *rbtree_insert(rbtree_t *tree, void *key);
  * @return A pointer to the node with the matching key or NULL if no such node
  * exists in the tree.
  */
-rbtree_node_t *rbtree_lookup(rbtree_t *tree, void *key);
+extern rbtree_node_t *rbtree_lookup(rbtree_t *tree, void *key);
 
 /** 
  * @brief Return the node with the key value with the highest ordinality 
@@ -163,7 +173,7 @@ rbtree_node_t *rbtree_lookup(rbtree_t *tree, void *key);
  * @return A pointer to the node with the highest ordinal key value in the
  * subtree or NULL if the subtree is empty.
  */
-rbtree_node_t *rbtree_maximum(rbtree_t *tree, rbtree_node_t *subtree);
+extern rbtree_node_t *rbtree_maximum(rbtree_t *tree, rbtree_node_t *subtree);
 
 /** 
  * @brief Return the node with the key value with the lowest ordinality rooted
@@ -176,7 +186,7 @@ rbtree_node_t *rbtree_maximum(rbtree_t *tree, rbtree_node_t *subtree);
  * @return A pointer to the node with the lowest ordinal key value in the
  * subtree or NULL if the subtree is empty.
  */
-rbtree_node_t *rbtree_minimum(rbtree_t *tree, rbtree_node_t *subtree);
+extern rbtree_node_t *rbtree_minimum(rbtree_t *tree, rbtree_node_t *subtree);
 
 /** 
  * @brief Create a new red-black tree. The cmp_func is a required function 
@@ -190,7 +200,7 @@ rbtree_node_t *rbtree_minimum(rbtree_t *tree, rbtree_node_t *subtree);
  * @return A pointer to the newly created rbtree_t structure or NULL if
  * memory allocation failed.
  */
-rbtree_t *rbtree_new(rbtree_key_compare_func_t cmp_func, rbtree_node_delete_func_t del_func);
+extern rbtree_t *rbtree_new(rbtree_key_compare_func_t cmp_func, rbtree_node_delete_func_t del_func);
 
 /** 
  * @brief Traverse a subtree in order from lowest ordinal key to highest 
@@ -207,7 +217,7 @@ rbtree_t *rbtree_new(rbtree_key_compare_func_t cmp_func, rbtree_node_delete_func
  * @return 0 if the traversal ended normally, -1 if the traversal was aborted
  * by the callback function.
  */
-int rbtree_traverse_ascending(rbtree_t *tree, rbtree_node_t *subtree, rbtree_traverse_func_t cb);
+extern int rbtree_traverse_ascending(rbtree_t *tree, rbtree_node_t *subtree, rbtree_traverse_func_t cb);
 
 /** 
  * @brief Traverse a subtree in order from highest ordinal key to lowest 
@@ -224,6 +234,6 @@ int rbtree_traverse_ascending(rbtree_t *tree, rbtree_node_t *subtree, rbtree_tra
  * @return 0 if the traversal ended normally, -1 if the traversal was aborted
  * by the callback function.
  */
-int rbtree_traverse_descending(rbtree_t *tree, rbtree_node_t *subtree, rbtree_traverse_func_t cb);
+extern int rbtree_traverse_descending(rbtree_t *tree, rbtree_node_t *subtree, rbtree_traverse_func_t cb);
 
 #endif // _RBTREE_H
