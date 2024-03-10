@@ -130,7 +130,6 @@ extern void rbtree_free(rbtree_t *tree);
 /**
  * @brief Returns a pointer to a NULL-terminated array of pointers to the 
  * keys in the tree in ascending order.
- * 
  * @param tree The rbtree for which the keys will be returned.
  * @return char** NULL on error, otherwise a pointer to a NULL-terminated
  * array of pointers to the keys in the tree.
