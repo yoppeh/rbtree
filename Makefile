@@ -1,6 +1,22 @@
 #
 # Makefile
 #
+# Targets:
+#   all
+#       The default target, if not target is specified. Compiles source files
+#       as necessary and links them into the final executable.
+#   clean
+#       Removes all object files and executables.
+# Variables:
+#   CC
+#       The C compiler to use. Defaults to gcc.
+#   CFLAGS
+#       Flags to pass to the C compiler. Defaults to -I/usr/include.
+#   debug=1
+#       Build with debug info
+#   LDFLAGS
+#       Flags to pass to the linker. Defaults to -L/usr/lib.
+#
 
 ifeq ($(CC),)
 CC = gcc
@@ -26,7 +42,7 @@ clean:
 	- rm -f randomized.txt
 
 test: test.o $(OBJS)
-	$(CC) $(LDFLAGS) $(LIBS) $^ -o $@
+	$(CC) $(LDFLAGS) $^ -o $@
 ifndef debug
 	strip $@
 endif
