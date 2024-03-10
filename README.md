@@ -17,6 +17,9 @@ Delete a _node_ from the _tree_. The _del_func_, if not **NULL**, will be called
 `void rbtree_free(rbtree_t *tree)`
 Delete all nodes in the given _tree_ and frees memory allocated to the _tree_ structure.
 
+`char **rbtree_get_keys(rbtree_t *tree)`
+Retrieves a NULL terminated array of pointers to the keys for the given rbtree_t.
+
 `rbtree_node_t *rbtree_insert(rbtree_t *tree, void *key)`
 Insert a new node with the given _key_ into the _tree_. The _cmp_func_ will be called to compare the given _key_ with the keys of other nodes in order to determine where the node should be inserted. If a node with this _key_ is already present in the _tree_, no new node is created and the pointer to **that** node is returned.
 
